@@ -1,0 +1,143 @@
+body {
+  width: 100vw;
+  height: 100vh;
+
+  header {
+    background-color: #38aef0;
+    color: #fff;
+    text-align: center;
+  }
+
+.side {
+  width:300px;
+  height: 100vh;
+  background-color: #2f3e51;
+  float: left;
+
+  &__nickname {
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background-color: #253141;
+    padding: 35px 0 0 20px;
+    height: 10vh;
+
+    i {
+      display: inline-block;
+      float: right;
+      padding: 0 10px 0 ;
+    }
+  }
+
+  &__room {
+  padding: 0 20px;
+  height: 90vh;
+
+
+    &__name {
+    font-size: 15px;
+    color: #fff;
+    padding: 20px 0 5px;
+    }
+
+    &__message {
+    font-size: 16px;
+    color: #fff;
+    padding: 0px 0 40px;
+    }
+  }
+  }
+
+  .main {
+    width: calc(100vw - 300px);
+    height: 100vh;
+    float: left;
+
+    &__header {
+      padding: 0 40px;
+      height: 10vh;
+      padding: 35px 0 0 40px;
+
+      &__room-name {
+        font-size: 20px;
+        color: #333;
+      }
+
+      &__members-name {
+        font-size: 12px;
+        color: #999;
+        padding: 15px 0;
+      }
+
+      a {
+        float: right;
+        height: 40px;
+        margin:  0 40px 0 ;
+        display: block;
+        padding: 10px 20px 0;
+        border: solid;
+        color: #38aef0;
+        text-decoration: none;
+      }
+    }
+
+    &__messages {
+      padding: 0 40px 0 40px;
+      height: 76vh;
+      border-top: solid thin #eee;
+
+      &__nickname {
+        font-size: 16px;
+        color: #434a54;
+        font-weight: bold;
+        display: block;
+        margin: 46px 10px 0 0;
+        float: left;
+      }
+
+      &__date {
+        color: #999;
+        font-size: 12px;
+        display: block;
+        margin: 50px 10px 0 0;
+        float: left;
+      }
+
+      &__message {
+        font-size: 14px;
+        color: #434a54;
+        padding: 10px 40px 40px 0;
+        clear: both;
+      }
+    }
+
+    &__comments {
+      padding: 0 40px 0 50px;
+      background-color: #aaa;
+      height: 10vh;
+    }
+
+    .comments {
+      padding: 20px 0;
+    }
+
+    .text {
+      height: 50px;
+    }
+
+    i {
+      position: absolute;
+      margin: 20px 0 0 -30px;
+    }
+
+    .button {
+      background-color: #38aef0;
+      color: #fff;
+      padding: 5px;
+      float: right;
+      height: 50px;
+      width: 80px;
+      margin: 0 0 0 15px;
+    }
+  }
+}
