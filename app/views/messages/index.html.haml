@@ -1,0 +1,45 @@
+%body
+  %header
+    チャットグループが作成されました
+
+  .side
+
+    .side__nickname
+      koki
+      %i.fa.fa-cog
+      %i.fa.fa-edit
+    .side__room
+      .side__room__name
+        room-name
+      .side__room__message
+        tezt
+
+  .main
+
+    .main__header
+      = link_to 'edit', ''
+
+      .main__header__room-name
+        room-name
+
+      .main__header__members-name
+        mebers: koki
+
+    .main__messages
+      %span.main__messages__nickname
+        koki
+      %span.main__messages__date
+        2/3
+      .main__messages__message
+        message test!!
+
+    .main__comments
+      %form{:action => '/messages', :class => "comments"}
+        %input{:name => "comments", :style => "width:90%", :class => "text", :placeholder =>"type a message"}
+          %label#file_photo
+            %i.fa.fa-image
+            %input{:type => "file", :id => "file_photo", :style => "display:none;"}
+        %input{:type => "submit", :value => "send", :class => "button"}
+
+
+
