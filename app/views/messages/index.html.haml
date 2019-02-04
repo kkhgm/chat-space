@@ -2,44 +2,43 @@
   %header
     チャットグループが作成されました
 
-  %div.side
+  .side
 
-    %div.side__nickname
+    .side__nickname
       koki
-      <i class="fa fa-cog"></i>
-      <i class="fa fa-edit"></i>
-    %div.side__room
-      %div.side__room__name
+      %i.fa.fa-cog
+      %i.fa.fa-edit
+    .side__room
+      .side__room__name
         room-name
-      %div.side__room__message
+      .side__room__message
         tezt
 
-  %div.main
+  .main
 
-    %div.main__header
+    .main__header
       = link_to 'edit', ''
 
-      %div.main__header__room-name
+      .main__header__room-name
         room-name
 
-      %div.main__header__members-name
+      .main__header__members-name
         mebers: koki
 
-    %div.main__messages
+    .main__messages
       %span.main__messages__nickname
         koki
       %span.main__messages__date
         2/3
-      %div.main__messages__message
+      .main__messages__message
         message test!!
 
-    %div.main__comments
+    .main__comments
       %form{:action => '/messages', :class => "comments"}
         %input{:name => "comments", :style => "width:90%", :class => "text", :placeholder =>"type a message"}
-          <label for="file_photo">
-          <i class="fa fa-image"></i>
-          <input type="file" id="file_photo" style="display:none;">
-          </label>
+          %label#file_photo
+            %i.fa.fa-image
+            %input{:type => "file", :id => "file_photo", :style => "display:none;"}
         %input{:type => "submit", :value => "send", :class => "button"}
 
 
