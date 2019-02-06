@@ -31,15 +31,24 @@
       %span.main__messages__date
         2/3
       .main__messages__message
-        message test!!
 
     .main__comments
+
       %form{:action => '/messages', :class => "comments"}
         %input{:name => "comments", :style => "width:90%", :class => "text", :placeholder =>"type a message"}
           %label#file_photo
             %i.fa.fa-image
             %input{:type => "file", :id => "file_photo", :style => "display:none;"}
         %input{:type => "submit", :value => "send", :class => "button"}
+
+      .form
+        = form_for [@group, @message] do |f|
+          = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+          .form__mask
+            = f.label :image, class: 'form__mask__image' do
+              = fa_icon 'picture-o', class: 'icon'
+              = f.file_field :image, class: 'hidden', style: "display:none"
+          = f.submit 'Send', class: 'form__submit'
 
 
 
