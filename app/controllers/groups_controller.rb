@@ -2,12 +2,13 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:edit, :update]
 
   def index
-    @person = current_user.id
+    @person = current_user
   end
 
   def new
     @group = Group.new
     @group.users << current_user
+    # 不明！！！
   end
 
   def create
