@@ -8,46 +8,6 @@ body {
     text-align: center;
   }
 
-.side {
-  width:300px;
-  height: 100vh;
-  background-color: #2f3e51;
-  float: left;
-
-  &__nickname {
-    font-weight: bold;
-    font-size: 16px;
-    color: #fff;
-    background-color: #253141;
-    padding: 35px 0 0 20px;
-    height: 10vh;
-
-    i {
-      display: inline-block;
-      float: right;
-      padding: 0 10px 0 ;
-    }
-  }
-
-  &__room {
-  padding: 0 20px;
-  height: 90vh;
-
-
-    &__name {
-    font-size: 15px;
-    color: #fff;
-    padding: 20px 0 5px;
-    }
-
-    &__message {
-    font-size: 16px;
-    color: #fff;
-    padding: 0px 0 40px;
-    }
-  }
-  }
-
   .main {
     width: calc(100vw - 300px);
     height: 100vh;
