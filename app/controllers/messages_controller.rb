@@ -4,6 +4,8 @@ class MessagesController < ApplicationController
   def index
     @message = Message.new
     @messages  = @group.messages.includes(:user)
+    # group.id~から、messageに該当するuser_idを参考にインスタンスをピック。
+    @members = @group.users.includes(:user)
 
   end
 

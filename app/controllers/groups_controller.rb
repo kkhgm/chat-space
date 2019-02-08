@@ -7,7 +7,8 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
     @group.users << current_user
-    # 不明！！！
+    #
+
   end
 
   def create
@@ -30,6 +31,7 @@ class GroupsController < ApplicationController
   private
   def group_params
     params.require(:group).permit(:name, { :user_ids => [] })
+    binding.pry
   end
 
   def set_group
