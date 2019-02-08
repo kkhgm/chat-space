@@ -1,14 +1,14 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:edit, :update]
+  before_action :set_group, only: [:edit, :update, :index]
 
   def index
-    @person = current_user
   end
 
   def new
     @group = Group.new
     @group.users << current_user
-    # 不明！！！
+    #
+
   end
 
   def create
@@ -31,6 +31,7 @@ class GroupsController < ApplicationController
   private
   def group_params
     params.require(:group).permit(:name, { :user_ids => [] })
+    binding.pry
   end
 
   def set_group
