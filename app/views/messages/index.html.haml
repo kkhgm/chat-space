@@ -15,7 +15,8 @@
 
       .main__header__members-name
         member:
-        = @members.name
+        - @members.each do |member|
+          = member.name
 
     .messages
       = render @messages

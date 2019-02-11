@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
     @message = Message.new
     @messages  = @group.messages.includes(:user)
     # group.id~から、messageに該当するuser_idを参考にインスタンスをピック。
-    @members = @group.users.includes(:user)
+    @members = @group.users
 
   end
 
