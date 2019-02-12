@@ -1,2 +1,7 @@
-json.content  @comment.text
-json.image  @comment.image
+# - binding.pry
+json.content  @message.content
+json.image    @message.image
+json.name     @message.user.name
+json.id       @message.user.id
+json.date     @message.created_at.strftime("%Y/%m/%d %H:%M")
+
