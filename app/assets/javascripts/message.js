@@ -15,11 +15,13 @@ $(document).on('turbolinks:load', function() {
                       <p class='lower-message__content'>
                       ${ message.content }
                       </p>
-                      ${ message.image }
                     </div>
                   </div>`
-    return html;
-    }
+    return html;}
+
+    function buildIMAGE(message){
+    var html = `<img class="lower-message__image" src=${ message.image } alt=${ message.content } />`
+    return html;}
 
     $("#new_message").on("submit", function(e){
       e.preventDefault();
@@ -33,11 +35,18 @@ $(document).on('turbolinks:load', function() {
         processData: false,
         contentType: false
       })
+
       .done(function(data){
         var html = buildHTML(data);
         $(".main__messages").append(html)
-          var element = document.getElementById('last-message');
-          element.scrollIntoView(false);
+
+        var add_img = buildIMAGE(data);
+        if (data.image !== null) {
+        $(".main__messages").append(add_img)
+        };
+
+        var element = document.getElementById('last-message');
+        element.scrollIntoView(false);
         $("#new_message")[0].reset();
       })
       .fail(function(){
