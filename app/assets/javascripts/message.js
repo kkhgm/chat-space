@@ -14,8 +14,8 @@ $(document).on('turbolinks:load', function() {
                     <div class='lower-meesage'>
                       <p class='lower-message__content'>
                       ${ message.content }
-                      ${ message.image }
                       </p>
+                      ${ message.image }
                     </div>
                   </div>`
     return html;
@@ -38,7 +38,7 @@ $(document).on('turbolinks:load', function() {
         $(".main__messages").append(html)
           var element = document.getElementById('last-message');
           element.scrollIntoView(false);
-        $("#message_content").val("");
+        $("#new_message")[0].reset();
       })
       .fail(function(){
       alert('error');
