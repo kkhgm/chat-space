@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
   $(function(){
-    function buildHTML(message){
+    function buildSendMessageHTML(message){
       var html = `<div id = "last-message" class='message'>
                     <div class='upper-message'>
                       <div class='upper-message__user-name'>
@@ -36,11 +36,11 @@ $(document).on('turbolinks:load', function() {
         contentType: false
       })
 
-      .done(function(data){
-        var html = buildHTML(data);
+      .done(function(jsonData){
+        var html = buildSendMessageHTML(jsonData);
         $(".main__messages").append(html)
 
-        var add_img = buildIMAGE(data);
+        var add_img = buildIMAGE(jsonData);
         if (data.image !== null) {
         $(".main__messages").append(add_img)
         };
