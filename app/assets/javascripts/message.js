@@ -49,9 +49,14 @@ $(document).on('turbolinks:load', function() {
         element.scrollIntoView(false);
         $("#new_message")[0].reset();
       })
+
       .fail(function(){
       alert('error');
-    })
+      })
+
+      .always(() => {
+      $(".form__submit").removeAttr("disabled");
+      });
     })
   })
 });
