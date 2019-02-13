@@ -45,31 +45,36 @@ body {
       padding: 0 40px 0 40px;
       height: 76vh;
       border-top: solid thin #eee;
+      overflow: scroll;
 
-      &__nickname {
-        font-size: 16px;
-        color: #434a54;
-        font-weight: bold;
-        display: block;
-        margin: 46px 10px 0 0;
-        float: left;
+        .upper-message{
+          &__user-name {
+            font-size: 16px;
+            color: #434a54;
+            font-weight: bold;
+            display: block;
+            margin: 46px 10px 0 0;
+            float: left;
+          }
+          &__date {
+            color: #999;
+            font-size: 12px;
+            display: block;
+            margin: 50px 10px 0 0;
+            float: left;
+          }
+        }
+
+        .lower-message {
+          &__content {
+            font-size: 14px;
+            color: #434a54;
+            padding: 10px 40px 40px 0;
+            clear: both;
+          }
+        }
       }
 
-      &__date {
-        color: #999;
-        font-size: 12px;
-        display: block;
-        margin: 50px 10px 0 0;
-        float: left;
-      }
-
-      &__message {
-        font-size: 14px;
-        color: #434a54;
-        padding: 10px 40px 40px 0;
-        clear: both;
-      }
-    }
 
     &__comments {
       padding: 0 40px 0 50px;
@@ -90,8 +95,9 @@ body {
       margin: 20px 0 0 -30px;
     }
 
-    .button {
+    .form__submit {
       background-color: #38aef0;
+      font-size: 20px;
       color: #fff;
       padding: 5px;
       float: right;

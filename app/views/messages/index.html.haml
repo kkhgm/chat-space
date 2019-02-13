@@ -6,23 +6,18 @@
   = render 'shared/side_bar'
 
   .main
-
     .main__header
       = link_to 'edit', ''
-
       .main__header__room-name
         = @group.name
-
       .main__header__members-name
         member:
         - @members.each do |member|
           = member.name
-
-    .messages
+    .main__messages
       = render @messages
 
     .main__comments
-
       .form
         = form_for [@group, @message] do |f|
           = f.text_field :content, class: 'form__message', placeholder: 'type a message'
@@ -31,3 +26,6 @@
               = fa_icon 'picture-o', class: 'icon'
               = f.file_field :image, class: 'hidden', style: "display:none"
           = f.submit 'Send', class: 'form__submit'
+
+
+  %footer
