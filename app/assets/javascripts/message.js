@@ -33,11 +33,9 @@ $(document).on('turbolinks:load', function() {
         contentType: false
       })
       .done(function(data){
-        console.log(data)
         var html = buildHTML(data);
-        $(".messages").append(html)
+        $(".main__messages").append(html)
           var element = document.getElementById('last-message');
-          console.log(element);
           element.scrollIntoView(false);
         $("#message_content").val("");
       })
