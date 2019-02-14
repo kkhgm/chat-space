@@ -1,5 +1,17 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.where('name LIKE(?)', "%#{params[:name]}%")
+
+
+    respond_to do |format|
+      format.html #{redirect_to group_messages_path(@group), notice: 'メッセージが送信されました'}
+      format.json
+    end
+    binding.pry
+
+  end
+
   def edit
   end
 
