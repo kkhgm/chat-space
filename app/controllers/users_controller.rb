@@ -3,14 +3,8 @@ class UsersController < ApplicationController
   def index
     @users = User.where('name LIKE(?)', "%#{params[:name]}%")
 
-    # num = 0
-    # @users.each do |user|
-    #   @users = user[num]
-    #   num += 1
-    # end
-
     respond_to do |format|
-      format.html #{redirect_to group_messages_path(@group), notice: 'メッセージが送信されました'}
+      format.html
       format.json
     end
     # binding.pry

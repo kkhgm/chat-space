@@ -1,5 +1,6 @@
 $(function(){
 
+var names = []
 var search_list = $(".chat-group-form__search")
 
 function appendUserName(jsonData) {
@@ -11,12 +12,18 @@ function appendUserName(jsonData) {
   search_list.append(html);
   }
 
+function deleteUserName(jsonData) {
+  var html =
+            `<div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
+               <input name='group[user_ids][]' type='hidden' value='ユーザーのid'>
+               <p class='chat-group-user__name'>${ jsonData.name }</p>
+               <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
+             </div>`
+  search_list.append(html);
+  }
 
   $("#user-search-field").on("keyup", function(){
     var users_name = $(this).val();
-    // var href = location.href + users_name
-
-    console.log(users_name);
 
     $.ajax({
       url: '/users',
@@ -26,16 +33,25 @@ function appendUserName(jsonData) {
     })
 
     .done(function(jsonData){
-      console.log(jsonData)
-      $("#user-search-field").empty();
       if (jsonData.lenght !== 0) {
         jsonData.forEach(function(jsonData) {
-          appendUserName(jsonData)
+          appendUserName(jsonData);
+          names.push(jsonData.name)
         });
+        console.log(names)
       }
     })
     .fail(function() {
       alert('ユーザー検索に失敗しました');
+    })
+
+    .done(function(jsonData) {
+    $(".user-search-add").on("click", function(){
+      jsonData.forEach(function(jsonData){
+        deleteUserName(jsonData)
+        })
+    $(this).parent().remove();
+      })
     })
 
   })
