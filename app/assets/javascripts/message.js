@@ -39,6 +39,7 @@ $(document).on('turbolinks:load', function() {
       .done(function(jsonData){
         var html = buildSendMessageHTML(jsonData);
         $(".main__messages").append(html)
+        console.log(jsonData)
 
         var add_img = buildIMAGE(jsonData);
         if (jsonData.image !== null) {

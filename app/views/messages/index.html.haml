@@ -7,7 +7,7 @@
 
   .main
     .main__header
-      = link_to 'edit', ''
+      = link_to 'edit', edit_group_path(@group)
       .main__header__room-name
         = @group.name
       .main__header__members-name
