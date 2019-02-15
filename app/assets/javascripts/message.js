@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function() {
       e.preventDefault();
       var formData = new FormData(this);
       var url = $(this).attr('action')
-      $.ajax({
+       $.ajax({
         url: url,
         type: "POST",
         data: formData,
@@ -39,25 +39,43 @@ $(document).on('turbolinks:load', function() {
       .done(function(jsonData){
         var html = buildSendMessageHTML(jsonData);
         $(".main__messages").append(html)
-        console.log(jsonData)
 
         var add_img = buildIMAGE(jsonData);
         if (jsonData.image !== null) {
-        $(".main__messages").append(add_img)
+          $(".main__messages").append(add_img)
         };
-
         var element = document.getElementById('last-message');
         element.scrollIntoView(false);
         $("#new_message")[0].reset();
       })
-
       .fail(function(){
-      alert('error');
+        alert('error');
       })
-
       .always(() => {
-      $(".form__submit").removeAttr("disabled");
+        $(".form__submit").removeAttr("disabled");
       });
     })
   })
+
+  $(function(){
+      setInterval (function(){
+      var catchMessagesUrl = $("#new_message").attr('action')
+
+      $.ajax({
+        url: catchMessagesUrl,
+        type: "GET",
+        data: { test : "test"},
+        dataType: 'json',
+        processData: false,
+        contentType: false
+      })
+       .done(function(catchMsassages) {
+          console.log(catchMsassages);
+        });
+       .fail(function() {
+          alert('失敗しました');
+       })
+
+      },5000);
+    })
 });
