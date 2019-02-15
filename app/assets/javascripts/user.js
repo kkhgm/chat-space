@@ -1,13 +1,12 @@
 $(function(){
 
-var names = []
-var search_list = $(".chat-group-form__search")
+var search_list = $("#user-search-result")
 
 function appendUserName(jsonData) {
   var html =
             `<div class="chat-group-user clearfix">
               <p class="chat-group-user__name">${ jsonData.name }</p>
-              <a class="user-search-add chat-group-user__btn chat-group-user__btn--add" data-user-id="ユーザーのid" data-user-name="ユーザー名">追加</a>
+              <a class="user-search-add chat-group-user__btn chat-group-user__btn--add" data-user-id="${ jsonData.id }" data-user-name="${ jsonData.name }">追加</a>
             </div>`
   search_list.append(html);
   }
@@ -15,7 +14,7 @@ function appendUserName(jsonData) {
 function deleteUserName(jsonData) {
   var html =
             `<div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
-               <input name='group[user_ids][]' type='hidden' value='ユーザーのid'>
+               <input name='group[user_ids][]' type='hidden' value='${ jsonData.id }'>
                <p class='chat-group-user__name'>${ jsonData.name }</p>
                <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
              </div>`
@@ -32,22 +31,21 @@ function deleteUserName(jsonData) {
       dataType: 'json',
     })
 
-    .done(function(jsonData){
-      if (jsonData.lenght !== 0) {
-        jsonData.forEach(function(jsonData) {
+    .done(function(jsonDatas){
+      $(".chat-group-user.clearfix").remove();
+      if (jsonDatas.lenght !== 0) {
+        jsonDatas.forEach(function(jsonData) {
           appendUserName(jsonData);
-          names.push(jsonData.name)
         });
-        console.log(names)
       }
     })
     .fail(function() {
       alert('ユーザー検索に失敗しました');
     })
 
-    .done(function(jsonData) {
+    .done(function(jsonDatas) {
     $(".user-search-add").on("click", function(){
-      jsonData.forEach(function(jsonData){
+      jsonDatas.forEach(function(jsonData){
         deleteUserName(jsonData)
         })
     $(this).parent().remove();
