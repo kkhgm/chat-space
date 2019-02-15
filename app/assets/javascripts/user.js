@@ -1,6 +1,5 @@
 $(function(){
 
-var search_list = $("#user-search-result")
 
 function appendUserName(jsonData) {
   var html =
@@ -8,7 +7,7 @@ function appendUserName(jsonData) {
               <p class="chat-group-user__name">${ jsonData.name }</p>
               <a class="user-search-add chat-group-user__btn chat-group-user__btn--add" data-user-id="${ jsonData.id }" data-user-name="${ jsonData.name }">追加</a>
             </div>`
-  search_list.append(html);
+  $("#user-search-result").append(html);
   }
 
 function deleteUserName(jsonData) {
@@ -18,8 +17,9 @@ function deleteUserName(jsonData) {
                <p class='chat-group-user__name'>${ jsonData.name }</p>
                <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
              </div>`
-  search_list.append(html);
+  $(".chat-group-users").append(html);
   }
+
 
   $("#user-search-field").on("keyup", function(){
     var users_name = $(this).val();
@@ -45,12 +45,14 @@ function deleteUserName(jsonData) {
 
     .done(function(jsonDatas) {
     $(".user-search-add").on("click", function(){
+      getUsersName = $(this).prev().text();
       jsonDatas.forEach(function(jsonData){
-        deleteUserName(jsonData)
+          if (jsonData.name == getUsersName) {
+          deleteUserName(jsonData)
+          }
         })
     $(this).parent().remove();
       })
     })
-
   })
 })
