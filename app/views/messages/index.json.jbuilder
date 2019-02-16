@@ -1,4 +1,4 @@
-
+# -binding.pry
 json.array! @catch_messages do |catch_message|
 
   json.content  catch_message.content

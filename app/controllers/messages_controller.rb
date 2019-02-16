@@ -7,7 +7,9 @@ class MessagesController < ApplicationController
     # group.id~から、messageに該当するuser_idを参考にインスタンスをピック。
     @members = @group.users
 
-    @catch_messages = Message.order("created_at DESC").limit(5)
+
+    @new_messages = Message.order("created_at DESC").limit(5)
+    @catch_messages = @messages - @new_messages
     respond_to do |format|
       format.html
       format.json

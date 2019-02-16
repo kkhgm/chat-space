@@ -23,6 +23,25 @@ $(document).on('turbolinks:load', function() {
     var html = `<img class="lower-message__image" src=${ message.image } alt=${ message.content } />`
     return html;}
 
+    function addMessages(catch_message){
+      var html = `<div id = "last-message" class='message'>
+                    <div class='upper-message'>
+                      <div class='upper-message__user-name'>
+                      ${ catch_message.name }
+                      ${ catch_message.id }
+                      </div>
+                      <div class='upper-message__date'>
+                      ${ catch_message.date }
+                      </div>
+                    </div>
+                    <div class='lower-meesage'>
+                      <p class='lower-message__content'>
+                      ${ catch_message.content }
+                      </p>
+                    </div>
+                  </div>`
+    return html;}
+
     $("#new_message").on("submit", function(e){
       e.preventDefault();
       var formData = new FormData(this);
@@ -55,7 +74,6 @@ $(document).on('turbolinks:load', function() {
         $(".form__submit").removeAttr("disabled");
       });
     })
-  })
 
   $(function(){
       setInterval (function(){
@@ -70,12 +88,19 @@ $(document).on('turbolinks:load', function() {
         contentType: false
       })
        .done(function(catchMsassages) {
-          console.log(catchMsassages);
+        catchMsassages.forEach(function(catchMsassage) {
+          console.log(catchMsassage.content);
+          var html = addMessages(catchMsassage);
+          $(".main__messages").append(html)
+          });
         });
-       .fail(function() {
-          alert('失敗しました');
-       })
+
+       // .fail(function() {
+       //    alert('失敗しました');
+       // })
 
       },5000);
     })
+  })
+
 });
