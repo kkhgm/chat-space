@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function() {
                     <div class='upper-message'>
                       <div class='upper-message__user-name'>
                       ${ catch_message.name }
-                      ${ catch_message.id }
+                      <span class= "check-no">${ catch_message.id }</span>
                       </div>
                       <div class='upper-message__date'>
                       ${ catch_message.date }
@@ -78,26 +78,33 @@ $(document).on('turbolinks:load', function() {
   $(function(){
       setInterval (function(){
       var catchMessagesUrl = $("#new_message").attr('action')
+      var ary = $('[data-id]');
+      var str = [];
+      for(var n=0,len=ary.length;n<len;n++){
+        str.push(ary[n].getAttribute('data-id'));
+      }
+      var getDataId  =  Math.max.apply(null, str);
+
+      console.log(getDataId)
 
       $.ajax({
         url: catchMessagesUrl,
         type: "GET",
-        data: { test : "test"},
+        data: { id: getDataId },
         dataType: 'json',
         processData: false,
         contentType: false
       })
        .done(function(catchMsassages) {
+
         catchMsassages.forEach(function(catchMsassage) {
-          console.log(catchMsassage.content);
           var html = addMessages(catchMsassage);
-          $(".main__messages").append(html)
-          });
+          // $(".main__messages").append(html)
         });
 
        // .fail(function() {
        //    alert('失敗しました');
-       // })
+       })
 
       },5000);
     })
