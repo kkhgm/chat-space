@@ -80,23 +80,19 @@ $(document).on('turbolinks:load', function() {
       var catchMessagesUrl = $("#new_message").attr('action')
       var ary = $('[data-id]');
       var str = [];
-      for(var n=0,len=ary.length;n<len;n++){
-        str.push(ary[n].getAttribute('data-id'));
+      for(var i = 0; i < ary.length; i++){
+        str.push(ary[i].getAttribute('data-id'));
       }
       var getDataId  =  Math.max.apply(null, str);
-
-      console.log(getDataId)
+      // debugger;
 
       $.ajax({
         url: catchMessagesUrl,
         type: "GET",
-        data: { id: getDataId },
+        data: { message_id: getDataId },
         dataType: 'json',
-        processData: false,
-        contentType: false
       })
        .done(function(catchMsassages) {
-
         catchMsassages.forEach(function(catchMsassage) {
           var html = addMessages(catchMsassage);
           // $(".main__messages").append(html)
