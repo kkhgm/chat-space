@@ -75,9 +75,10 @@ $(document).on('turbolinks:load', function() {
       });
     })
 
+
   $(function(){
       setInterval (function(){
-      var catchMessagesUrl = $("#new_message").attr('action')
+      var catchMessagesUrl = $("#new_message").attr('action') + '/search'
       var ary = $('[data-id]');
       var str = [];
       for(var i = 0; i < ary.length; i++){
@@ -92,18 +93,24 @@ $(document).on('turbolinks:load', function() {
         data: { message_id: getDataId },
         dataType: 'json',
       })
-       .done(function(catchMsassages) {
-        catchMsassages.forEach(function(catchMsassage) {
-          var html = addMessages(catchMsassage);
-          // $(".main__messages").append(html)
+
+       .done(function(catchMsassage) {
+              console.log(catchMsassage.id)
+        if (catchMsassage.id !== getDataId) {
+              // console.log(catchMsassage)
+              console.log(getDataId)
+              // console.log(catchMsassage.id)
+              var html = addMessages(catchMsassage);
+            $(".main__messages").append(html)
+        }
         });
-
-       // .fail(function() {
-       //    alert('失敗しました');
-       })
-
       },5000);
+
+       .fail(function(){
+         alert('error');
+      })
+
     })
   })
-
 });
+// });
