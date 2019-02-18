@@ -2,10 +2,9 @@ $(document).on('turbolinks:load', function() {
   $(function(){
     function buildSendMessageHTML(message){
       var html = `<div id = "last-message" class='message'>
-                    <div class='upper-message'>
+                    <div class='upper-message' data-id = ${ catch_message.id }>
                       <div class='upper-message__user-name'>
                       ${ message.name }
-                      ${ message.id }
                       </div>
                       <div class='upper-message__date'>
                       ${ message.date }
@@ -25,10 +24,9 @@ $(document).on('turbolinks:load', function() {
 
     function addMessages(catch_message){
       var html = `<div id = "last-message" class='message'>
-                    <div class='upper-message'>
+                    <div class='upper-message' data-id = ${ catch_message.id }>
                       <div class='upper-message__user-name'>
                       ${ catch_message.name }
-                      <span class= "check-no">${ catch_message.id }</span>
                       </div>
                       <div class='upper-message__date'>
                       ${ catch_message.date }
@@ -85,7 +83,6 @@ $(document).on('turbolinks:load', function() {
         str.push(ary[i].getAttribute('data-id'));
       }
       var getDataId  =  Math.max.apply(null, str);
-      // debugger;
 
       $.ajax({
         url: catchMessagesUrl,
@@ -95,22 +92,20 @@ $(document).on('turbolinks:load', function() {
       })
 
        .done(function(catchMsassage) {
-              console.log(catchMsassage.id)
-        if (catchMsassage.id !== getDataId) {
-              // console.log(catchMsassage)
-              console.log(getDataId)
-              // console.log(catchMsassage.id)
-              var html = addMessages(catchMsassage);
-            $(".main__messages").append(html)
-        }
-        });
-      },5000);
+          if (catchMsassage.id !== getDataId) {
+           str.push(catchMsassage.id);
+           var html = addMessages(catchMsassage);
+           $(".main__messages").append(html)
+           var element = document.getElementById('last-message');
+           element.scrollIntoView(false);
+          };
+        })
 
-       .fail(function(){
-         alert('error');
-      })
+     .fail(function(){
+       alert('error');
+      });
 
-    })
-  })
+      },20000);
+    });
+  });
 });
-// });

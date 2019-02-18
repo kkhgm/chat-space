@@ -13,13 +13,15 @@ class MessagesController < ApplicationController
     table_last_message = @group.messages.last
     calc = table_last_message.id - html_last_message.id
 
+    # binding.pry
     if calc == 0
         @catch_message = html_last_message
     elsif calc == 1
       @catch_message = table_last_message
       send_to_json
     else
-      @catch_messages = @group.messages.where('id> ?',params[:message_id])
+      @catch_messages = @group.messages.last(calc)
+      # @catch_messages = @group.messages.where('id> ?',params[:message_id])
       @catch_messages.each do |catch_message|
         @catch_message = catch_message
         send_to_json
