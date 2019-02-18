@@ -13,7 +13,6 @@ class MessagesController < ApplicationController
     table_last_message = @group.messages.last
     calc = table_last_message.id - html_last_message.id
 
-    # binding.pry
     if calc == 0
         @catch_message = html_last_message
     elsif calc == 1

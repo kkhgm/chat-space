@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   $(function(){
     function buildSendMessageHTML(message){
       var html = `<div id = "last-message" class='message'>
-                    <div class='upper-message' data-id = ${ catch_message.id }>
+                    <div class='upper-message' data-id = ${ message.id }>
                       <div class='upper-message__user-name'>
                       ${ message.name }
                       </div>
@@ -94,8 +94,15 @@ $(document).on('turbolinks:load', function() {
        .done(function(catchMsassage) {
           if (catchMsassage.id !== getDataId) {
            str.push(catchMsassage.id);
+
            var html = addMessages(catchMsassage);
            $(".main__messages").append(html)
+
+           var add_img = buildIMAGE(catchMsassage);
+            if (catchMsassage.image !== null) {
+              $(".main__messages").append(add_img)
+            };
+
            var element = document.getElementById('last-message');
            element.scrollIntoView(false);
           };
