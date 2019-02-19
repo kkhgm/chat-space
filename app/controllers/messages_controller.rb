@@ -6,7 +6,35 @@ class MessagesController < ApplicationController
     @messages  = @group.messages.includes(:user)
     # group.id~から、messageに該当するuser_idを参考にインスタンスをピック。
     @members = @group.users
+  end
 
+  def search
+    # html_last_message = @group.messages.find(params[:message_id])
+    html_last_message = @group.messages.where('id < ?',params[:message_id])
+    table_last_message = @group.messages
+    calc = table_last_message.count - html_last_message.count - 1.to_i
+    html_last_message = @group.messages.last
+
+# binding.pry
+    if calc == 0
+        @catch_message = html_last_message
+    elsif calc == 1
+      @catch_message = table_last_message.last
+      send_to_json
+    else
+      @catch_messages = @group.messages.last(calc)
+      @catch_messages.each do |catch_message|
+        @catch_message = catch_message
+        send_to_json
+      end
+    end
+  end
+
+  def send_to_json
+      respond_to do |format|
+        format.html
+        format.json
+      end
   end
 
   def create
@@ -25,7 +53,6 @@ class MessagesController < ApplicationController
   end
 
   private
-
   def message_params
     params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
   end
@@ -34,4 +61,3 @@ class MessagesController < ApplicationController
     @group = Group.find(params[:group_id])
   end
 end
-
