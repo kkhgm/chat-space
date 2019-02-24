@@ -95,15 +95,40 @@ body {
       margin: 20px 0 0 -30px;
     }
 
-    .form__submit {
-      background-color: #38aef0;
-      font-size: 20px;
-      color: #fff;
-      padding: 5px;
-      float: right;
+      .form {
+    background-color: #DDDDDD;
+    box-sizing: border-box;
+    height: 90px;
+    padding: 20px 50px 20px 40px;
+    &__message {
+      border: none;
+      float: left;
       height: 50px;
-      width: 80px;
-      margin: 0 0 0 15px;
+      width: calc(100% - 150px);
     }
+    &__mask {
+      background-color: $white;
+      float: left;
+      height: 50px;
+      padding-right: 10px;
+      &__image {
+        font-size: 20px;
+        line-height: 50px;
+      }
+      .hidden {
+        display: none;
+      }
+    }
+    &__submit {
+      background-color: $light_blue;
+      border: none;
+      color: $white;
+      float: right;
+      font-size: 16px;
+      height: 50px;
+      margin-left: 15px;
+      padding: 0 30px;
+    }
+  }
   }
 }

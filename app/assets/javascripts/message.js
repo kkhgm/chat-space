@@ -75,7 +75,7 @@ $(document).on('turbolinks:load', function() {
 
 
   $(function(){
-      setInterval (function(){
+      timerId = setInterval (function(){
       var catchMessagesUrl = $("#new_message").attr('action') + '/search'
       var ary = $('[data-id]');
       var str = [];
@@ -84,35 +84,42 @@ $(document).on('turbolinks:load', function() {
       }
       var getDataId  =  Math.max.apply(null, str);
 
-      $.ajax({
-        url: catchMessagesUrl,
-        type: "GET",
-        data: { message_id: getDataId },
-        dataType: 'json',
-      })
+      if ( ary.length !== 0){
+        locationHref = location.href
+        if ( locationHref.match("groups/./messages") ){
 
-       .done(function(catchMsassage) {
-          if (catchMsassage.id !== getDataId) {
-           str.push(catchMsassage.id);
+          $.ajax({
+            url: catchMessagesUrl,
+            type: "GET",
+            data: { message_id: getDataId },
+            dataType: 'json',
+          })
 
-           var html = addMessages(catchMsassage);
-           $(".main__messages").append(html)
+           .done(function(catchMsassage) {
+              if (catchMsassage.id !== getDataId) {
+               str.push(catchMsassage.id);
 
-           var add_img = buildIMAGE(catchMsassage);
-            if (catchMsassage.image !== null) {
-              $(".main__messages").append(add_img)
-            };
+               var html = addMessages(catchMsassage);
+               $(".main__messages").append(html)
 
-           var element = document.getElementById('last-message');
-           element.scrollIntoView(false);
-          };
-        })
+               var add_img = buildIMAGE(catchMsassage);
+                if (catchMsassage.image !== null) {
+                  $(".main__messages").append(add_img)
+                };
 
-     .fail(function(){
-       alert('error');
-      });
+               var element = document.getElementById('last-message');
+               element.scrollIntoView(false);
+              };
+            })
 
-      },20000);
+         .fail(function(){
+           alert('メッセージの追加に失敗しました');
+          });
+        }else {
+          clearInterval(timerId);
+        }
+      }
+      },5000);
     });
   });
 });
