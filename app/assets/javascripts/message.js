@@ -61,6 +61,7 @@ $(document).on('turbolinks:load', function() {
         if (jsonData.image !== null) {
           $(".main__messages").append(add_img)
         };
+
         var element = document.getElementById('last-message');
         element.scrollIntoView(false);
         $("#new_message")[0].reset();
@@ -86,8 +87,7 @@ $(document).on('turbolinks:load', function() {
 
       if ( ary.length !== 0){
         locationHref = location.href
-        if ( locationHref.match("groups/./messages") ){
-
+        if ( locationHref.match("groups/[0-9]{1,3}/messages") ){
           $.ajax({
             url: catchMessagesUrl,
             type: "GET",
