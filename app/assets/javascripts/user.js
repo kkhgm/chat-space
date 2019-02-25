@@ -13,18 +13,45 @@ $(document).on('turbolinks:load', function() {
 
   function deleteUserName(jsonData) {
     var html =
-              `<div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
+              `<div class='chat-group-user clearfix js-chat-member' id='${ jsonData.id }'>
                  <input name='group[user_ids][]' type='hidden' value='${ jsonData.id }'>
                  <p class='chat-group-user__name'>${ jsonData.name }</p>
                  <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
                </div>`
-    $(".chat-group-users").append(html);
+    $(".chat-group-users.js-add-user").append(html);
     }
+
+  function indicateUserName(jsonData) {
+    var html = ` <div class='chat-group-user clearfix js-chat-member' id='${ jsonData.id }'>
+                 <input name='group[user_ids][]' type='hidden' value='${ jsonData.id }'>
+                 <p class='chat-group-user__name'>${ jsonData.name }</p>
+                 <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
+               </div>`
+    $(".chat-group-users.js-add-user").append(html);
+    }
+
+    window.onload =  function(firstscript){
+      var groupId = location.href.replace(3000, "",).replace(/[^0-9]/g, "",);
+      $.ajax({
+        url: '/users/search',
+        type: "GET",
+        data: { id: groupId },
+        dataType: 'json'
+      })
+
+      .done(function(jsonDatas){
+        $(".chat-group-user.clearfix").remove();
+        if (jsonDatas.lenght !== 0) {
+          jsonDatas.forEach(function(jsonData) {
+            indicateUserName(jsonData);
+          });
+        }
+      })
+    };
 
 
     $("#user-search-field").on("keyup", function(){
       var users_name = $(this).val();
-
       $.ajax({
         url: '/users',
         type: "GET",
