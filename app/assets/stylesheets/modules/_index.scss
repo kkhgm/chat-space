@@ -14,9 +14,8 @@ body {
     float: left;
 
     &__header {
-      padding: 0 40px;
-      height: 10vh;
-      padding: 35px 0 0 40px;
+      height: 65px;
+      padding: 20px 30px 15px;
 
       &__room-name {
         font-size: 20px;
@@ -43,7 +42,7 @@ body {
 
     &__messages {
       padding: 0 40px 0 40px;
-      height: 76vh;
+      height: calc(100vh - 100px - 90px );
       border-top: solid thin #eee;
       overflow: scroll;
 
@@ -79,7 +78,7 @@ body {
     &__comments {
       padding: 0 40px 0 50px;
       background-color: #aaa;
-      height: 10vh;
+      height: 90px;
     }
 
     .comments {
