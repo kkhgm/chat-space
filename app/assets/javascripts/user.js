@@ -11,6 +11,13 @@ $(document).on('turbolinks:load', function() {
     $("#user-search-result").append(html);
     }
 
+  function noUserName(jsonData) {
+    var html =
+              `<div class="chat-group-user clearfix">
+              </div>`
+    $("#user-search-result").append(html);
+    }
+
   function deleteUserName(jsonData) {
     var html =
               `<div class='chat-group-user clearfix js-chat-member' id='${ jsonData.id }'>
@@ -25,12 +32,11 @@ $(document).on('turbolinks:load', function() {
     var html = ` <div class='chat-group-user clearfix js-chat-member' id='${ jsonData.id }'>
                  <input name='group[user_ids][]' type='hidden' value='${ jsonData.id }'>
                  <p class='chat-group-user__name'>${ jsonData.name }</p>
-                 <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
                </div>`
     $(".chat-group-users.js-add-user").append(html);
     }
 
-    window.onload =  function(firstscript){
+    window.addEventListener('load',function() {
       var groupId = location.href.replace(3000, "",).replace(/[^0-9]/g, "",);
       $.ajax({
         url: '/users/search',
@@ -47,7 +53,7 @@ $(document).on('turbolinks:load', function() {
           });
         }
       })
-    };
+    });
 
 
     $("#user-search-field").on("keyup", function(){
@@ -60,11 +66,15 @@ $(document).on('turbolinks:load', function() {
       })
 
       .done(function(jsonDatas){
-        $(".chat-group-user.clearfix").remove();
+        $("#user-search-result").children().remove();
+        // 上記をどう置くか？
+
         if (jsonDatas.lenght !== 0) {
           jsonDatas.forEach(function(jsonData) {
             appendUserName(jsonData);
           });
+        }else {
+           noUserName("一致する果物はありませんでした");
         }
       })
       .fail(function() {
@@ -72,7 +82,7 @@ $(document).on('turbolinks:load', function() {
       })
 
       .done(function(jsonDatas) {
-      $(".user-search-add").on("click", function(){
+      $(".user-search-add.chat-group-user__btn.chat-group-user__btn--add").on("click", function(){
         getUsersName = $(this).prev().text();
         jsonDatas.forEach(function(jsonData){
             if (jsonData.name == getUsersName) {
@@ -81,6 +91,11 @@ $(document).on('turbolinks:load', function() {
           })
       $(this).parent().remove();
         })
+      $(function(){
+        $(document).on('click', '.user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn', function(){
+        $(this).parent().remove();
+        });
+      });
       })
     })
   })
