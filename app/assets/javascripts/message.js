@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
   $(function(){
     function buildSendMessageHTML(message){
-      var html = `<div id = "last-message" class='message'>
+      var html = `<div id = "last-message${ message.id }" class='message'>
                     <div class='upper-message' data-id = ${ message.id }>
                       <div class='upper-message__user-name'>
                       ${ message.name }
@@ -23,7 +23,7 @@ $(document).on('turbolinks:load', function() {
     return html;}
 
     function addMessages(catch_message){
-      var html = `<div id = "last-message" class='message'>
+      var html = `<div id = "last-message${ catch_message.id }" class='message'>
                     <div class='upper-message' data-id = ${ catch_message.id }>
                       <div class='upper-message__user-name'>
                       ${ catch_message.name }
@@ -62,8 +62,17 @@ $(document).on('turbolinks:load', function() {
           $(".main__messages").append(add_img)
         };
 
-        var element = document.getElementById('last-message');
+        var ary = $('[data-id]');
+        var str = [];
+        for(var i = 0; i < ary.length; i++){
+          str.push(ary[i].getAttribute('data-id'));
+        }
+        var getDataId  =  Math.max.apply(null, str);
+
+        var moveLast = 'last-message' + getDataId
+        var element = document.getElementById(moveLast);
         element.scrollIntoView(false);
+
         $("#new_message")[0].reset();
       })
       .fail(function(){
@@ -106,9 +115,11 @@ $(document).on('turbolinks:load', function() {
                 if (catchMsassage.image !== null) {
                   $(".main__messages").append(add_img)
                 };
+                var id = getDataId + 1
+                var moveLast = 'last-message' + id
 
-               var element = document.getElementById('last-message');
-               element.scrollIntoView(false);
+                var element = document.getElementById(moveLast);
+                element.scrollIntoView(false);
               };
             })
 
@@ -117,9 +128,9 @@ $(document).on('turbolinks:load', function() {
           });
         }else {
           clearInterval(timerId);
-        }
+          }
       }
-      },5000);
+      },1000);
     });
   });
 });
