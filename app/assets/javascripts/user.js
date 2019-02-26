@@ -36,7 +36,7 @@ $(document).on('turbolinks:load', function() {
     $(".chat-group-users.js-add-user").append(html);
     }
 
-    window.addEventListener('load',function() {
+    $(document).ready(function() {
       var groupId = location.href.replace(3000, "",).replace(/[^0-9]/g, "",);
       $.ajax({
         url: '/users/search',
@@ -69,6 +69,7 @@ $(document).on('turbolinks:load', function() {
         $("#user-search-result").children().remove();
         if (jsonDatas.length !== 0) {
           jsonDatas.forEach(function(jsonData) {
+          appendUserName(jsonData)
           });
         }
         else {
