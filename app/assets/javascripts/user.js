@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function() {
 
   function noUserName(jsonData) {
     var html =
-              `<div class="chat-group-user clearfix">
+              `<div class="chat-group-user clearfix">${jsonData}
               </div>`
     $("#user-search-result").append(html);
     }
@@ -67,15 +67,13 @@ $(document).on('turbolinks:load', function() {
 
       .done(function(jsonDatas){
         $("#user-search-result").children().remove();
-        // 上記をどう置くか？
-
-        if (jsonDatas.lenght !== 0) {
+        if (jsonDatas.length !== 0) {
           jsonDatas.forEach(function(jsonData) {
-            appendUserName(jsonData);
           });
-        }else {
-           noUserName("一致する果物はありませんでした");
         }
+        else {
+          noUserName("一致ユーザーはありません")
+        };
       })
       .fail(function() {
         alert('ユーザー検索に失敗しました');
