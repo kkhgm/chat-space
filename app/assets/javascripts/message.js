@@ -130,7 +130,7 @@ $(document).on('turbolinks:load', function() {
           clearInterval(timerId);
           }
       }
-      },1000);
+      },5000);
     });
   });
 });
