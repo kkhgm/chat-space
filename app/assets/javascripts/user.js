@@ -37,7 +37,8 @@ $(document).on('turbolinks:load', function() {
     }
 
     $(document).ready(function() {
-      var groupId = location.href.replace(3000, "",).replace(/[^0-9]/g, "",);
+      var groupId = location.href.replace(/[^0-9]/g, "",).replace(18224253229, "",);
+
       $.ajax({
         url: '/users/search',
         type: "GET",
