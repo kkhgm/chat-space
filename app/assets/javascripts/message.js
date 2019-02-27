@@ -98,18 +98,27 @@ $(document).on('turbolinks:load', function() {
               if (catchMsassage.id !== getDataId) {
                str.push(catchMsassage.id);
 
-                var html = buildSendMessageHTML(catchMsassage);
-                var no_img = noIMAGE(catchMsassage);
-                if (catchMsassage.image !== null) {
-                $(".main__messages").append(html)
-                } else {
-                $(".main__messages").append(no_img)
-                }
+               function moveLast(){
+                  var id = getDataId + 1
+                  var moveLast = 'last-message' + id
+                  var element = document.getElementById(moveLast);
+                  element.scrollIntoView(false);
+               };
 
-                var id = getDataId + 1
-                var moveLast = 'last-message' + id
-                var element = document.getElementById(moveLast);
-                element.scrollIntoView(false);
+                var getNewDataId  =  Math.max.apply(null, str);
+                console.log("recieve!")
+
+                if (getDataId !== getNewDataId){
+                    var html = buildSendMessageHTML(catchMsassage);
+                    var no_img = noIMAGE(catchMsassage);
+                    if (catchMsassage.image !== null) {
+                      $(".main__messages").append(html)
+                      moveLast()
+                    } else {
+                        $(".main__messages").append(no_img)
+                        moveLast()
+                    }
+                };
               };
             })
 
