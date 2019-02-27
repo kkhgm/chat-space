@@ -83,6 +83,8 @@ $(document).on('turbolinks:load', function() {
         str.push(ary[i].getAttribute('data-id'));
       }
       var getDataId  =  Math.max.apply(null, str);
+      console.log("send!")
+      console.log(getDataId)
 
       if ( ary.length !== 0){
         locationHref = location.href
@@ -95,8 +97,16 @@ $(document).on('turbolinks:load', function() {
           })
 
            .done(function(catchMsassage) {
-              if (catchMsassage.id !== getDataId) {
-               str.push(catchMsassage.id);
+              for(var i = 0; i < ary.length; i++){
+                str.push(ary[i].getAttribute('data-id'));
+              }
+              var getNewDataId  =  Math.max.apply(null, str);
+                console.log("recieve!")
+                console.log(getNewDataId)
+                console.log(getDataId)
+
+              if (catchMsassage.id !== getDataId && catchMsassage.id !== getNewDataId) {
+               console.log("自動更新スタート")
 
                function moveLast(){
                   var id = getDataId + 1
@@ -105,10 +115,6 @@ $(document).on('turbolinks:load', function() {
                   element.scrollIntoView(false);
                };
 
-                var getNewDataId  =  Math.max.apply(null, str);
-                console.log("recieve!")
-
-                if (getDataId !== getNewDataId){
                     var html = buildSendMessageHTML(catchMsassage);
                     var no_img = noIMAGE(catchMsassage);
                     if (catchMsassage.image !== null) {
@@ -117,9 +123,10 @@ $(document).on('turbolinks:load', function() {
                     } else {
                         $(".main__messages").append(no_img)
                         moveLast()
-                    }
                 };
               };
+               console.log("更新しない")
+
             })
 
          .fail(function(){
