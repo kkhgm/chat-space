@@ -100,6 +100,7 @@ $(document).on('turbolinks:load', function() {
               for(var i = 0; i < ary.length; i++){
                 str.push(ary[i].getAttribute('data-id'));
               }
+              str.push(catchMsassage.id);
               var getNewDataId  =  Math.max.apply(null, str);
                 console.log("recieve!")
                 console.log(getNewDataId)
