@@ -104,6 +104,8 @@ $(document).on('turbolinks:load', function() {
                 console.log("recieve!")
                 console.log(getNewDataId)
                 console.log(getDataId)
+                console.log(catchMsassage.id)
+
 
               if (catchMsassage.id !== getDataId && catchMsassage.id !== getNewDataId) {
                console.log("自動更新スタート")
