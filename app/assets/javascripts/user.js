@@ -32,12 +32,18 @@ $(document).on('turbolinks:load', function() {
     var html = ` <div class='chat-group-user clearfix js-chat-member' id='${ jsonData.id }'>
                  <input name='group[user_ids][]' type='hidden' value='${ jsonData.id }'>
                  <p class='chat-group-user__name'>${ jsonData.name }</p>
+                 <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
                </div>`
     $(".chat-group-users.js-add-user").append(html);
     }
 
-    $(document).ready(function() {
-      var groupId = location.href.replace(/[^0-9]/g, "",).replace(18224253229, "",);
+
+      $(document).ready(function() {
+      var loc = location.href
+      var groupId = loc.replace(/[^0-9]/g, "",).replace(18224253229, "",);
+
+      locationHref = location.href
+      if ( locationHref.match("groups/[0-9]{1,3}/edit") ){
 
       $.ajax({
         url: '/users/search',
@@ -54,8 +60,14 @@ $(document).on('turbolinks:load', function() {
           });
         }
       })
+      }
     });
 
+     $(function(){
+        $(document).on('click', '.user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn', function(){
+        $(this).parent().remove();
+        });
+      });
 
     $("#user-search-field").on("keyup", function(){
       var users_name = $(this).val();
@@ -91,11 +103,6 @@ $(document).on('turbolinks:load', function() {
           })
       $(this).parent().remove();
         })
-      $(function(){
-        $(document).on('click', '.user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn', function(){
-        $(this).parent().remove();
-        });
-      });
       })
     })
   })

@@ -62,14 +62,7 @@ $(document).on('turbolinks:load', function() {
           $(".main__messages").append(add_img)
         };
 
-        var ary = $('[data-id]');
-        var str = [];
-        for(var i = 0; i < ary.length; i++){
-          str.push(ary[i].getAttribute('data-id'));
-        }
-        var getDataId  =  Math.max.apply(null, str);
-
-        var moveLast = 'last-message' + getDataId
+        var moveLast = 'last-message' + jsonData.id
         var element = document.getElementById(moveLast);
         element.scrollIntoView(false);
 
