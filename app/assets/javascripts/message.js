@@ -83,8 +83,6 @@ $(document).on('turbolinks:load', function() {
         str.push(ary[i].getAttribute('data-id'));
       }
       var getDataId  =  Math.max.apply(null, str);
-      console.log("send!")
-      console.log(getDataId)
 
       if ( ary.length !== 0){
         locationHref = location.href
@@ -103,14 +101,8 @@ $(document).on('turbolinks:load', function() {
                 new_id.push(ary[i].getAttribute('data-id'));
               }
               var getNewDataId  =  Math.max.apply(null, new_id);
-                console.log("recieve!")
-                console.log(getDataId)
-                console.log(getNewDataId)
-                console.log(catchMsassage.id)
-
 
               if (catchMsassage.id !== getDataId && catchMsassage.id !== getNewDataId) {
-               console.log("自動更新スタート")
                new_id.push(catchMsassage.id);
 
                function moveLast(){
@@ -129,8 +121,6 @@ $(document).on('turbolinks:load', function() {
                         moveLast()
                 };
               };
-               console.log("更新しない")
-
             })
 
          .fail(function(){
