@@ -15,26 +15,23 @@ $(document).on('turbolinks:load', function() {
                       ${ message.content }
                       </p>
                     </div>
+                    <img class="lower-message__image" src=${ message.image } alt=${ message.content } />
                   </div>`
     return html;}
 
-    function buildIMAGE(message){
-    var html = `<img class="lower-message__image" src=${ message.image } alt=${ message.content } />`
-    return html;}
-
-    function addMessages(catch_message){
-      var html = `<div id = "last-message${ catch_message.id }" class='message'>
-                    <div class='upper-message' data-id = ${ catch_message.id }>
+    function noIMAGE(message){
+      var html = `<div id = "last-message${ message.id }" class='message'>
+                    <div class='upper-message' data-id = ${ message.id }>
                       <div class='upper-message__user-name'>
-                      ${ catch_message.name }
+                      ${ message.name }
                       </div>
                       <div class='upper-message__date'>
-                      ${ catch_message.date }
+                      ${ message.date }
                       </div>
                     </div>
                     <div class='lower-meesage'>
                       <p class='lower-message__content'>
-                      ${ catch_message.content }
+                      ${ message.content }
                       </p>
                     </div>
                   </div>`
@@ -55,12 +52,12 @@ $(document).on('turbolinks:load', function() {
 
       .done(function(jsonData){
         var html = buildSendMessageHTML(jsonData);
-        $(".main__messages").append(html)
-
-        var add_img = buildIMAGE(jsonData);
+        var no_img = noIMAGE(jsonData);
         if (jsonData.image !== null) {
-          $(".main__messages").append(add_img)
-        };
+        $(".main__messages").append(html)
+        } else {
+        $(".main__messages").append(no_img)
+        }
 
         var moveLast = 'last-message' + jsonData.id
         var element = document.getElementById(moveLast);
@@ -101,16 +98,16 @@ $(document).on('turbolinks:load', function() {
               if (catchMsassage.id !== getDataId) {
                str.push(catchMsassage.id);
 
-               var html = addMessages(catchMsassage);
-               $(".main__messages").append(html)
-
-               var add_img = buildIMAGE(catchMsassage);
+                var html = buildSendMessageHTML(catchMsassage);
+                var no_img = noIMAGE(catchMsassage);
                 if (catchMsassage.image !== null) {
-                  $(".main__messages").append(add_img)
-                };
+                $(".main__messages").append(html)
+                } else {
+                $(".main__messages").append(no_img)
+                }
+
                 var id = getDataId + 1
                 var moveLast = 'last-message' + id
-
                 var element = document.getElementById(moveLast);
                 element.scrollIntoView(false);
               };
