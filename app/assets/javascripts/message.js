@@ -97,23 +97,24 @@ $(document).on('turbolinks:load', function() {
           })
 
            .done(function(catchMsassage) {
+              var ary = $('[data-id]');
+              var new_id = [];
               for(var i = 0; i < ary.length; i++){
-                str.push(ary[i].getAttribute('data-id'));
+                new_id.push(ary[i].getAttribute('data-id'));
               }
-              str.push(catchMsassage.id);
-              var getNewDataId  =  Math.max.apply(null, str);
+              var getNewDataId  =  Math.max.apply(null, new_id);
                 console.log("recieve!")
-                console.log(getNewDataId)
                 console.log(getDataId)
+                console.log(getNewDataId)
                 console.log(catchMsassage.id)
 
 
               if (catchMsassage.id !== getDataId && catchMsassage.id !== getNewDataId) {
                console.log("自動更新スタート")
+               new_id.push(catchMsassage.id);
 
                function moveLast(){
-                  var id = getDataId + 1
-                  var moveLast = 'last-message' + id
+                  var moveLast = 'last-message' + getNewDataId
                   var element = document.getElementById(moveLast);
                   element.scrollIntoView(false);
                };
