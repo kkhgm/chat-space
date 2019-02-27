@@ -106,8 +106,12 @@ $(document).on('turbolinks:load', function() {
                new_id.push(catchMsassage.id);
 
                function moveLast(){
-                  var moveLast = 'last-message' + getNewDataId
+                  var id = getNewDataId + 1
+                  var moveLast = 'last-message' + id
                   var element = document.getElementById(moveLast);
+                console.log(getNewDataId)
+                console.log(element)
+
                   element.scrollIntoView(false);
                };
 
